@@ -1,0 +1,11 @@
+# Ignore backend environment file containing secrets
+/backend/.env
+
+# Node modules and build outputs
+node_modules/
+dist/
+
+# Editor files
+.vscode/
+.idea/
+.DS_Store
