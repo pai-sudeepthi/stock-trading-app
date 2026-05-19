@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import { set } from "mongoose";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,7 +14,7 @@ export default function Login() {
 
   try {
     const res = await axios.post(
-      "http://localhost:3002/api/auth/login",
+      `${import.meta.env.VITE_API_URL}/api/auth/login`,
       {
         email,
         password,
