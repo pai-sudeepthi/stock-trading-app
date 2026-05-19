@@ -10,6 +10,7 @@ const { HoldingsModel } = require('./model/HoldingsModel');
 const { PositionsModel } = require('./model/PositionsModel');
 const { OrderModel } = require('./model/OrderModel');
 const { UserModel } = require('./model/UserModel');
+const { WatchlistModel } = require('./model/WatchlistModel');
 const { userVerification } = require('./middlewares/authMiddleware');
 
 const authRoutes = require("./routes/authRoutes");
@@ -31,6 +32,14 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/watchlist", watchlistRoutes);
 
+app.get("/api/auth/verify", userVerification, (req, res) => {
+  res.json({
+    status: true,
+    message: "Authorized",
+    user: req.user,
+  });
+});
+
 app.get('/allHoldings', async (req, res) => { 
     let allHoldings = await HoldingsModel.find({});
     res.json(allHoldings);
@@ -39,6 +48,11 @@ app.get('/allHoldings', async (req, res) => {
 app.get('/allPositions', async (req, res) => { 
     let allPositions = await PositionsModel.find({});
     res.json(allPositions);
+});
+
+app.get('/allWatchlist', async (req, res) => {
+    let allWatchlist = await WatchlistModel.find({});
+    res.json(allWatchlist);
 });
 
 app.post('/newOrder', async (req, res) => {

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+// import { set } from "mongoose";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -22,15 +25,34 @@ export default function Login() {
       }
     );
 
-    console.log(res.data);
     navigate("/dashboard");
   } catch (err) {
-    console.log(err.response.data);
+    setMessage(err.response.data.message);
+    setEmail("");
+    setPassword("");
   }
   };
 
   return <div className="container">
     <div className="row mb-5 mt-3">
+      {/* Alert message */}
+      <div className="mt-3">
+            {message && (
+              <div
+                className={"alert alert-danger alert-dismissible fade show"}  
+                role="alert"
+                style={{position:"fixed", width:"80%"}}
+              >
+                {message}
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="alert"
+                ></button>
+              </div>
+            )}
+          </div>
+          {/* Alert message end */}
       <h1
         className="p-3 fs-3 mt-5 text-center fw-medium"
         style={{ color: "#424242" }}
@@ -66,7 +88,7 @@ export default function Login() {
 
             <div className="mt-4 d-flex justify-content-between">
              <button className="btn btn-primary" type="submit">Login</button>
-             <a href="/signup" className="btn btn-link">Don't have an account? Sign up here</a>
+             <Link to="/signup" className="btn btn-link">Don't have an account? Sign up here</Link>
             </div>
           </form>
         </div>

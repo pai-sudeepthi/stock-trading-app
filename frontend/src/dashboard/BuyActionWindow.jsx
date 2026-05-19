@@ -5,7 +5,7 @@ import axios from "axios";
 
 import GeneralContext from "./GeneralContext";
 
-// import "/public/css/BuyActionWindow.css";
+import "../../public/css/BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);

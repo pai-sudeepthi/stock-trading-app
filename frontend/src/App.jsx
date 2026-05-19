@@ -12,6 +12,7 @@ import Footer from "./landingPage/Footer";
 import Navbar from "./landingPage/Navbar";
 import NotFound from "./landingPage/NotFound";
 import Home from "./dashboard/Home";
+import ProtectedRoute from "./ProtectedRoute";
 
 
 function Layout() {
@@ -27,7 +28,7 @@ function Layout() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard/*" element={<Home />} />
+        <Route path="/dashboard/*" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/pricing" element={<PricingPage />} />

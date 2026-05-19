@@ -1,5 +1,5 @@
 const { UserModel } = require("../model/UserModel");
-const createToken = require("../utils/createToken");
+const createSecretToken  = require("../utils/createToken");
 const bcrypt = require("bcryptjs");
 
 exports.signup = async (req, res) => {
@@ -13,7 +13,7 @@ exports.signup = async (req, res) => {
 
     const newUser = await UserModel.create({ username, email, password });
 
-    const token = createToken(newUser._id);
+    const token = createSecretToken(newUser);
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const token = createToken(existingUser._id);
+    const token = createSecretToken(existingUser);
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -53,4 +53,9 @@ exports.login = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie("token");
+  return res.json({ status: true, message: "Logged out successfully" });
 };

@@ -1,11 +1,14 @@
 import axios from "axios";
+//import { set } from "mongoose";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,15 +27,35 @@ export default function SignUp() {
       }
     );
 
-    console.log(res.data);
     navigate("/dashboard");
   } catch (err) {
-    console.log(err.response.data);
+    setMessage(err.response.data.message);
+    setUsername("");
+    setEmail("");
+    setPassword("");
   }
   };
 
   return <div className="container">
     <div className="row mb-5 mt-3">
+      {/* Alert message */}
+      <div className="mt-3">
+            {message && (
+              <div
+                className={"alert alert-danger alert-dismissible fade show"}  
+                role="alert"
+                style={{position:"fixed", width:"80%"}}
+              >
+                {message}
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="alert"
+                ></button>
+              </div>
+            )}
+          </div>
+          {/* Alert message end */}
       <h1
         className="p-3 fs-3 mt-5 text-center fw-medium"
         style={{ color: "#424242" }}
@@ -77,7 +100,7 @@ export default function SignUp() {
 
             <div className="mt-4 d-flex justify-content-between">
              <button className="btn btn-primary" type="submit">SignUp</button>
-             <a href="/login" className="btn btn-link">Already have an account? Login here</a>
+             <Link to="/login" className="btn btn-link">Already have an account? Login here</Link>
             </div>
           </form>
         </div>

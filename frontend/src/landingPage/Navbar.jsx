@@ -22,11 +22,6 @@ export default function Navbar() {
           <form className="d-flex" role="search">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 pt-1">
               <li className="nav-item px-3">
-                <Link className="nav-link active" to="/dashboard">
-                  Dashboard
-                </Link>
-              </li>
-              <li className="nav-item px-3">
                 <Link className="nav-link active" to="/signup">
                   SignUp
                 </Link>

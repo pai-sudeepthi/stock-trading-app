@@ -1,6 +1,6 @@
-const {schema} = require('mongoose');
+const { Schema } = require('mongoose');
 
-const WatchlistSchema = new schema({
+const WatchlistSchema = new Schema({
     name: String,
     price: Number,
     percent: String,
