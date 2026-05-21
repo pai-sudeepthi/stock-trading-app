@@ -17,8 +17,8 @@ exports.signup = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // change to true in production
-      sameSite: "strict",
+      secure: true, // change to true in production
+      sameSite: "none", // change to "strict" or "lax" in production
     });
 
     res.status(201).json({ message: "Signup successful" });
@@ -43,10 +43,19 @@ exports.login = async (req, res) => {
 
     const token = createSecretToken(existingUser);
 
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: true,
+    //   sameSite: "none",
+    // });
+    
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      sameSite:
+        process.env.NODE_ENV === "production"
+          ? "none"
+          : "lax",
     });
 
     res.status(200).json({ message: "Login successful" });
