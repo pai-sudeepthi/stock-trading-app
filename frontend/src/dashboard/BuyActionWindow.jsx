@@ -13,7 +13,7 @@ const BuyActionWindow = ({ uid }) => {
   const { closeBuyWindow } = useContext(GeneralContext);
 
   const handleBuyClick = () => {
-    axios.post("http://localhost:3002/newOrder", {
+    axios.post(`${import.meta.env.VITE_API_URL}/newOrder`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,

@@ -23,7 +23,7 @@ const uri = process.env.MONGO_URL;
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: true,
     credentials: true,
 }));
 app.use(express.json());

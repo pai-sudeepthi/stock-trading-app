@@ -17,7 +17,7 @@ const Menu = ({ user }) => {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3002/api/auth/logout", {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
         method: "GET",
         credentials: "include",
       });

@@ -14,7 +14,7 @@ const Home = () => {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3002/api/auth/verify",
+          `${import.meta.env.VITE_API_URL}/api/auth/verify`,
           {
             withCredentials: true,
           }
